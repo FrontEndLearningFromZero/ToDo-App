@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "http://localhost:8080",
 };
 
 app.use(cors());
@@ -26,5 +26,10 @@ require("./routes/todo.routes.js")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  try {
+    console.log(`Server is running on port ${PORT}.`);
+  } catch (error) {
+    console.log("Cannot start server");
+    console.log(error);
+  }
 });
