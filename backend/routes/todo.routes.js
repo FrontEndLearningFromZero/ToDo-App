@@ -5,6 +5,7 @@ module.exports = app => {
   
     // Create a new todo
     router.post("/", todos.create);
+    router.post("/create-multiple", todos.createMultiple);
   
     // Retrieve all todos
     router.get("/", todos.findAll);
@@ -13,10 +14,13 @@ module.exports = app => {
     router.get("/published", todos.findAllPublished);
   
     // Retrieve a single Todo with id
-    router.get("/:id", todos.findOne);
+    router.get("/get-by-id/", todos.findOne);
+    router.get("/get-by-id/:id", todos.findOne);
   
     // Update a Todo with id
-    router.put("/:id", todos.update);
+    router.put("/update-by-id", todos.update);
+    router.put("/update-by-id/:id", todos.update);
+    router.put("/update-multiple/:id", todos.updateMultiple);
   
     // Delete a Todo with id
     router.delete("/:id", todos.delete);

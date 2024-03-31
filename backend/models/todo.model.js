@@ -1,27 +1,46 @@
 const sql = require("./db.js");
 
 // constructor
-const Todo = function(todo) {
-  this.title = todo.name;
+const Todo = function (todo) {
+  this.name = todo.name;
   this.description = todo.description;
   this.status = todo.status;
 };
 
 Todo.create = (newTodo, result) => {
-  sql.query("INSERT INTO todos SET ?", newTodo, (err, res) => {
+  var sqlQuery = "INSERT INTO todos SET ?";
+  sql.query(sqlQuery, newTodo, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created Todo: ", { id: res.insertId, ...newTodo });
-    result(null, { id: res.insertId, ...newTodo });
+    console.log("created Todo: ", { ...newTodo });
+    result(null, { ...newTodo });
   });
 };
 
-Todo.findById = (id, result) => {
-  sql.query(`SELECT * FROM todos WHERE id = ${id}`, (err, res) => {
+Todo.createMultiple = (arrTodos, result) => {
+  var sqlQuery = `INSERT INTO todos (name, description, status) VALUES ?`;
+  sql.query(sqlQuery, [arrTodos], (err, data) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+
+    result(null, data);
+  });
+};
+
+Todo.findById = (findTodo, result) => {
+  var sqlQuery = `SELECT * FROM todos WHERE id = ${findTodo.id}`;
+
+  if (findTodo.status) {
+    sqlQuery += ` AND status = '${findTodo.status}'`;
+  }
+
+  sql.query(sqlQuery, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -29,24 +48,24 @@ Todo.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found Todo: ", res[0]);
+      console.log("found Todo: ", res);
       result(null, res[0]);
       return;
     }
 
     // not found Todo with the id
-    result({ kind: "not_found" }, null);
+    result({ message: "not_found" }, null);
   });
 };
 
 Todo.getAll = (name, result) => {
-  let query = "SELECT * FROM todos";
+  let sqlQuery = "SELECT * FROM todos WHERE status = 'active'";
 
   if (name) {
-    query += ` WHERE title LIKE '%${title}%'`;
+    sqlQuery += ` AND title LIKE '%${name}%'`;
   }
 
-  sql.query(query, (err, res) => {
+  sql.query(sqlQuery, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -58,8 +77,10 @@ Todo.getAll = (name, result) => {
   });
 };
 
-Todo.getAllstatus = result => {
-  sql.query("SELECT * FROM todos WHERE status=true", (err, res) => {
+Todo.getAllstatus = (status, result) => {
+  var sqlQuery = `SELECT * FROM todos WHERE status = '${status}'`;
+
+  sql.query(sqlQuery, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -71,10 +92,18 @@ Todo.getAllstatus = result => {
   });
 };
 
-Todo.updateById = (id, Todo, result) => {
+Todo.updateById = (Todo, result) => {
+  var sqlQuery =
+    "UPDATE todos SET name = ?, description = ?, status = ? WHERE id = ?";
+
+  if (!Todo.id) {
+    result(null, { message: "id is empty." });
+    return;
+  }
+
   sql.query(
-    "UPDATE todos SET title = ?, description = ?, status = ? WHERE id = ?",
-    [Todo.title, Todo.description, Todo.status, id],
+    sqlQuery,
+    [Todo.name, Todo.description, Todo.status, Todo.id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -84,18 +113,31 @@ Todo.updateById = (id, Todo, result) => {
 
       if (res.affectedRows == 0) {
         // not found Todo with the id
-        result({ kind: "not_found" }, null);
+        result({ message: "not_found" }, null);
         return;
       }
 
-      console.log("updated Todo: ", { id: id, ...Todo });
-      result(null, { id: id, ...Todo });
+      console.log("updated Todo: ", { ...Todo });
+      result(null, { ...Todo });
     }
   );
 };
 
+Todo.updateMultiple = () => {
+  // not implemented yet
+}
+
 Todo.remove = (id, result) => {
-  sql.query("DELETE FROM todos WHERE id = ?", id, (err, res) => {
+  var sqlQuery = `UPDATE todos SET status = 'deleted' WHERE id = ?`;
+
+  if (!id) {
+    result(null, {
+      message: "id is empty - don't know which task for deleting",
+    });
+    return;
+  }
+
+  sql.query(sqlQuery, id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -104,7 +146,7 @@ Todo.remove = (id, result) => {
 
     if (res.affectedRows == 0) {
       // not found Todo with the id
-      result({ kind: "not_found" }, null);
+      result({ message: "not_found" }, null);
       return;
     }
 
@@ -113,8 +155,10 @@ Todo.remove = (id, result) => {
   });
 };
 
-Todo.removeAll = result => {
-  sql.query("DELETE FROM todos", (err, res) => {
+Todo.removeAll = (result) => {
+  var sqlQuery = "UPDATE todos SET status = 'deleted'";
+
+  sql.query(sqlQuery, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
