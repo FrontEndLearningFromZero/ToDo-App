@@ -35,6 +35,5 @@ We have basic config for prettier formatting, depending on editor we will have d
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "git.autofetch": true,
-    "tabnine.experimentalAutoImports": true,
 }
 ```
