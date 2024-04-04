@@ -21,6 +21,17 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to TODO application." });
 });
 
+const start = () => {
+  app.listen(PORT, () => {
+    try {
+      console.log(`Server is running on port ${PORT}.`);
+    } catch (error) {
+      console.log("Cannot start server");
+      console.log(error);
+    }
+  });
+};
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 
@@ -29,7 +40,7 @@ const readline = require("node:readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: "Enter your DB (or type 'default): ",
+  prompt: "Enter your DB (or type 'default'): ",
 });
 
 rl.prompt();
@@ -40,14 +51,7 @@ rl.on("line", (input) => {
     rl.close();
     // Server Starts here
     require("./routes/todo.routes.js")(app);
-    app.listen(PORT, () => {
-      try {
-        console.log(`Server is running on port ${PORT}.`);
-      } catch (error) {
-        console.log("Cannot start server");
-        console.log(error);
-      }
-    });
+    start();
   } else {
     console.log("Invalid input, please try again.");
     rl.prompt();
