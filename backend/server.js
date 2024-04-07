@@ -3,8 +3,11 @@ const cors = require("cors");
 
 const app = express();
 
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+
 var corsOptions = {
-  origin: "http://localhost:8080",
+  origin: `http://localhost:${PORT}`,
 };
 
 app.use(cors());
@@ -32,9 +35,6 @@ const start = () => {
   });
 };
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-
 const readline = require("node:readline");
 
 const rl = readline.createInterface({
@@ -51,13 +51,12 @@ rl.on("line", (input) => {
     rl.close();
     // Server Starts here
     require("./routes/todo.routes.js")(app);
-    console.log("Server starts at 8080");
     start();
+    rl.close();
   } else if (input === "none") {
     console.log("No db connected");
-    console.log("Server starts at 8080");
-
     start();
+    rl.close();
   } else {
     console.log("Invalid input, please try again.");
     rl.prompt();
