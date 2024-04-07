@@ -46,20 +46,23 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on("line", (input) => {
-  if (input === "default") {
-    console.log("Correct input!");
-    rl.close();
-    // Server Starts here
-    require("./routes/todo.routes.js")(app);
-    start();
-    rl.close();
-  } else if (input === "none") {
-    console.log("No db connected");
-    start();
-    rl.close();
-  } else {
-    console.log("Invalid input, please try again.");
-    rl.prompt();
+  switch (input) {
+    case "default":
+      console.log("Correct input!");
+      rl.close();
+      // Server Starts here
+      require("./routes/todo.routes.js")(app);
+      start();
+      rl.close();
+      break;
+    case "none":
+      console.log("No db connected");
+      start();
+      rl.close();
+      break;
+    default:
+      console.log("Invalid input, please try again.");
+      rl.prompt();
   }
 }).on("close", () => {
   console.log("Exiting the readline interface...");
