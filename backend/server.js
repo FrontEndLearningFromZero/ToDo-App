@@ -50,7 +50,7 @@ rl.on("line", (input) => {
     case "default":
       console.log("Correct input!");
       rl.close();
-      // Server Starts here
+      // Server Starts here - Check ToDo Routes
       require("./routes/todo.routes.js")(app);
       start();
       rl.close();

@@ -174,8 +174,8 @@ Todo.removeAll = (result) => {
   });
 };
 
-Todo.restore = (req, (err, data) => {
+Todo.restore = () => {
   // change stt back to 'active'
-})
+}
 
 module.exports = Todo;
