@@ -51,6 +51,12 @@ rl.on("line", (input) => {
     rl.close();
     // Server Starts here
     require("./routes/todo.routes.js")(app);
+    console.log("Server starts at 8080");
+    start();
+  } else if (input === "none") {
+    console.log("No db connected");
+    console.log("Server starts at 8080");
+
     start();
   } else {
     console.log("Invalid input, please try again.");
