@@ -57,7 +57,7 @@ exports.createMultiple = (req, res) => {
 // Retrieve all Todos from the database (with condition).
 exports.findAll = (req, res) => {
   const name = req.query.name;
-
+  const status = req.query.status || 'active'
   Todo.getAll(name, (err, data) => {
     if (err)
       res.status(500).send({
@@ -119,6 +119,19 @@ exports.update = (req, res) => {
     }
   })
 };
+
+exports.updateMultiple = (req, res) => {
+
+  Todo.updateMultiple(arr, (err, data) => {
+    if(err) {
+      res.status(500).send({
+        message: "[update] Cannot update multiple Todos"
+      })
+    } else {
+      res.send(data)
+    }
+  })
+}
 
 // Delete a Todo with the specified id in the request
 exports.delete = (req, res) => {
