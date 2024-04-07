@@ -13,7 +13,7 @@ exports.create = (req, res) => {
   const todo = new Todo({
     name: req.body.name,
     description: req.body.description,
-    status: req.body.status || 'active',
+    status: req.body.status || "active",
   });
 
   // Save Todo in the database
@@ -34,15 +34,15 @@ exports.createMultiple = (req, res) => {
       message: "Content can not be empty!",
     });
   }
-  
-  var arrTodos = req.body.map(item => {
+
+  var arrTodos = req.body.map((item) => {
     const todo = new Todo({
       name: item.name,
       description: item.description,
-      status: item.status || 'active',
+      status: item.status || "active",
     });
-    return [todo.name, todo.description, todo.status]
-  })
+    return [todo.name, todo.description, todo.status];
+  });
 
   // Save Todo in the database
   Todo.createMultiple(arrTodos, (err, data) => {
@@ -56,9 +56,10 @@ exports.createMultiple = (req, res) => {
 
 // Retrieve all Todos from the database (with condition).
 exports.findAll = (req, res) => {
-  const name = req.query.name;
-  const status = req.query.status || 'active'
-  Todo.getAll(name, (err, data) => {
+  const nameTodo = req.query.name;
+  const statusTodo = req.query.status;
+
+  Todo.getAll(nameTodo, statusTodo, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving Todos.",
@@ -106,57 +107,56 @@ exports.update = (req, res) => {
     id: req.body.id || req.params.id || req.query.id,
     name: req.body.name,
     description: req.body.description,
-    status: req.body.status
-  }
+    status: req.body.status,
+  };
 
   Todo.updateById(updatedTodo, (err, data) => {
-    if(err) {
+    if (err) {
       res.status(500).send({
-        message: err.message || "[update] Cannot update the id"
-      })
+        message: err.message || "[update] Cannot update the id",
+      });
     } else {
-      res.send(data)
+      res.send(data);
     }
-  })
+  });
 };
 
 exports.updateMultiple = (req, res) => {
-
   Todo.updateMultiple(arr, (err, data) => {
-    if(err) {
+    if (err) {
       res.status(500).send({
-        message: "[update] Cannot update multiple Todos"
-      })
+        message: "[update] Cannot update multiple Todos",
+      });
     } else {
-      res.send(data)
+      res.send(data);
     }
-  })
-}
+  });
+};
 
 // Delete a Todo with the specified id in the request
 exports.delete = (req, res) => {
-  var id = req.body.id || req.query.id || req.params.id
+  var id = req.body.id || req.query.id || req.params.id;
 
   Todo.remove(id, (err, data) => {
-    if(err) {
+    if (err) {
       res.status(500).send({
-        message: err.message || "[delete] Cannot remove the id"
-      })
+        message: err.message || "[delete] Cannot remove the id",
+      });
     } else {
-      res.send(data)
+      res.send(data);
     }
-  })
+  });
 };
 
 // Delete all Todos from the database.
 exports.deleteAll = (req, res) => {
   Todo.removeAll((err, data) => {
-    if(err) {
+    if (err) {
       res.status(500).send({
-        message: err.message || "[deleteAll] Cannot remove all ids."
-      })
+        message: err.message || "[deleteAll] Cannot remove all ids.",
+      });
     } else {
-      res.send(data)
+      res.send(data);
     }
-  })
+  });
 };

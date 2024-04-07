@@ -62,15 +62,13 @@ Todo.getAll = (name, status, result) => {
   let sqlQuery = "SELECT * FROM todos";
 
   if (status) {
-    sqlQuery += ` WHERE status = '${status}'` 
-  } else {
-    sqlQuery += ` WHERE status = 'active'`
+    sqlQuery += ` WHERE status = '${status}'`;
   }
 
   if (name) {
     sqlQuery += ` AND title LIKE '%${name}%'`;
   }
-  
+
   sql.query(sqlQuery, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -131,7 +129,7 @@ Todo.updateById = (Todo, result) => {
 
 Todo.updateMultiple = () => {
   // not implemented yet
-}
+};
 
 Todo.remove = (id, result) => {
   var sqlQuery = `UPDATE todos SET status = 'deleted' WHERE id = ?`;
