@@ -8,7 +8,12 @@ function App() {
             .then((data) => {
                 setData(data)
             })
-    }, [data])
+    }, [])
+
+    // useEffect(() => {
+    //  for auto-sync: my idea
+    //  other way: useReducer
+    // }, [data])
 
     return (
         <div className="App">
