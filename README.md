@@ -18,5 +18,5 @@ Refer:
 - https://www.digitalocean.com/community/tutorial-series/how-to-code-in-javascript
 
 # UI Reference:
-
 https://www.figma.com/community/file/1050122330859830585
+https://www.figma.com/file/bWisWYpESnl2sJiwmJKUgh/To-Do-List-App-UI---FE?type=design&t=twVxPgqMpQsgiNDp-6
