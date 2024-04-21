@@ -1,5 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react'
+import Item from './components/Item'
 function App() {
     const [data, setData] = useState([])
     // useEffect(() => {
@@ -32,6 +33,8 @@ function App() {
             >
                 Delete id 1
             </button> */}
+            <Item />
+            <Item />
         </div>
     )
 }
