@@ -2,13 +2,13 @@ import './App.css'
 import { useEffect, useState } from 'react'
 function App() {
     const [data, setData] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:8080/api/todos')
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch('http://localhost:8080/api/todos')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setData(data)
+    //         })
+    // }, [])
 
     // useEffect(() => {
     //  for auto-sync: my idea
@@ -18,7 +18,7 @@ function App() {
     return (
         <div className="App">
             <h1>TODO App asdasdasds</h1>
-            {data.map((dt, index) => (
+            {/* {data.map((dt, index) => (
                 <div key={index}>
                     {dt.name} + {dt.id} + {dt.description}
                 </div>
@@ -31,7 +31,7 @@ function App() {
                 }}
             >
                 Delete id 1
-            </button>
+            </button> */}
         </div>
     )
 }
