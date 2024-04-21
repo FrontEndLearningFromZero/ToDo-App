@@ -23,3 +23,12 @@ https://www.figma.com/file/bWisWYpESnl2sJiwmJKUgh/To-Do-List-App-UI---FE?type=de
 # useEffect: cannot compare 2 objs or arrays
 https://codedamn.com/news/javascript/compare-2-arrays-javascript
 https://www.30secondsofcode.org/js/s/array-comparison/
+
+# Tailwind
+https://dev.to/joserfelix/6-tips-for-tailwind-css-development-with-resources-33i4
+https://al-az.me/blog/clsx-tailwind-template-literal
+
+# Relationship
+https://dev.to/elhamnajeebullah/mysql-how-to-create-one-to-many-relationship-4gph
+
+# Custom Hooks
