@@ -37,3 +37,12 @@ We have basic config for prettier formatting, depending on editor we will have d
     "git.autofetch": true,
 }
 ```
+
+## Remote Localhost with Ngrok
+
+Download and install ngrok https://dashboard.ngrok.com/get-started/setup/
+Run this command to start ngrok server along with localhost app
+
+```console
+ngrok http --domain=genuinely-sensible-dinosaur.ngrok-free.app --config ngrok.yml 3000
+```
