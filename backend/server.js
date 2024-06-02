@@ -57,6 +57,7 @@ rl.on("line", (input) => {
       break;
     case "none":
       console.log("No db connected");
+      require("./jsonDB.js")(app);
       start();
       rl.close();
       break;
