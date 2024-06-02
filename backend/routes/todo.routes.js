@@ -20,6 +20,7 @@ module.exports = app => {
     // Update a Todo with id
     router.put("/update-by-id", todos.update);
     router.put("/update-by-id/:id", todos.update);
+    router.put("/update-by-id/:id/:name", todos.update);
     router.put("/update-multiple/:id", todos.updateMultiple);
   
     // Delete a Todo with id

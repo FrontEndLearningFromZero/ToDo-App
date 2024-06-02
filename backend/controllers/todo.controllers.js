@@ -105,7 +105,7 @@ exports.findAllPublished = (req, res) => {
 exports.update = (req, res) => {
   var updatedTodo = {
     id: req.body.id || req.params.id || req.query.id,
-    name: req.body.name,
+    name: req.body.name || req.params.name || req.query.name,
     description: req.body.description,
     status: req.body.status,
   };
