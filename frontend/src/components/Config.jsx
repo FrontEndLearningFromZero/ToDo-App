@@ -8,7 +8,7 @@ const Config = () => {
         config.setConfig(!config.someConfig)
     }
     return (
-        <div className="">
+        <div className="container">
             {/* ToDo: make a popup modal to set config */}
             <div>Setconfig {config.someConfig}</div>
             <button
