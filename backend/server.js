@@ -57,7 +57,7 @@ rl.on("line", (input) => {
       break;
     case "none":
       console.log("No db connected");
-      require("./jsonDB.js")(app);
+      require("./routes/fakeData.routes.js")(app);
       start();
       rl.close();
       break;
