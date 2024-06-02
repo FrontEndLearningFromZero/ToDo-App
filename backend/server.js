@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 
 var corsOptions = {
   origin: `http://localhost:${PORT}`,
@@ -17,11 +17,11 @@ app.use(cors());
 app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to TODO application." });
+  res.json({message: "Welcome to TODO application."});
 });
 
 const start = () => {
