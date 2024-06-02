@@ -9,49 +9,49 @@
     "id": 2,
     "name": "TASK 2",
     "description": "TEST update",
-    "status": "deleted"
+    "status": 0
   },
   {
     "id": 3,
     "name": "TASK 3",
     "description": "TEST",
-    "status": "deleted"
+    "status": 0
   },
   {
     "id": 4,
     "name": "TASK 4",
     "description": "TEST",
-    "status": "deleted"
+    "status": 0
   },
   {
     "id": 5,
     "name": "TASK 5",
     "description": "TEST",
-    "status": "deleted"
+    "status": 0
   },
   {
     "id": 6,
     "name": "TASK 6",
     "description": "TEST",
-    "status": "active"
+    "status": 1
   },
   {
     "id": 7,
     "name": "TASK 7",
     "description": "TEST",
-    "status": "deleted"
+    "status": 0
   },
   {
     "id": 8,
     "name": "TASK 8",
     "description": "TEST",
-    "status": "active"
+    "status": 1
   },
   {
     "id": 9,
     "name": "TASK 9",
     "description": "TEST",
-    "status": "active"
+    "status": 1
   },
   {
     "id": 10,
@@ -93,12 +93,12 @@
     "id": 16,
     "name": "TASK 16",
     "description": "TEST",
-    "status": "active"
+    "status": 1
   },
   {
     "id": 17,
     "name": "TASK 17",
     "description": "TEST",
-    "status": "active"
+    "status": 1
   }
 ]

@@ -11,7 +11,7 @@ Requirements:
 const Todo = function (todo) {
   this.name = todo.name;
   this.description = todo.description;
-  this.status = todo.status;
+  this.status = todo.status; // 0: delete, 1: active, 2: complete 
 };
 
 
