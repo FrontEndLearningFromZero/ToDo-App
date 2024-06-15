@@ -4,7 +4,9 @@ module.exports = (app) => {
   app.get("/todos/json", jsonControllers.getAllDataJson);
   app.get("/todos/json/:id", jsonControllers.getDataJsonById);
 
-  app.post("/todos/json/:id", jsonControllers.updateDataJsonById);
+  app.put("/todos/json/:id", jsonControllers.updateDataJsonById);
 
-  app.delete("todos/json/:id", jsonControllers.deleteDataJsonById);
+  app.post("todos/json/create", jsonControllers.createNewToDoJson)
+
+  app.delete("todos/json/remove/:id", jsonControllers.deleteDataJsonById);
 };

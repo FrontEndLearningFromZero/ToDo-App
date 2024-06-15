@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
+const db = require("./models");
 
 const app = express();
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 var corsOptions = {
   origin: `http://localhost:${PORT}`,
@@ -24,53 +25,68 @@ app.get("/", (req, res) => {
   res.json({message: "Welcome to TODO application."});
 });
 
-const start = () => {
-  app.listen(PORT, () => {
-    try {
+require("./routes/todo.routes.js")(app);
+require("./routes/user.routes.js")(app);
+
+db.sequelize
+  .sync()
+  .then((result) => {
+    console.log("=== Synced db. ===");
+    app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}.`);
-    } catch (error) {
-      console.log("Cannot start server");
-      console.log(error);
-    }
+    });
+  })
+  .catch((err) => {
+    console.log("=== Failed to sync db: " + err.message + " ===");
   });
-};
 
-const readline = require("node:readline");
+// const start = () => {
+//   app.listen(PORT, () => {
+//     try {
+//       console.log(`Server is running on port ${PORT}.`);
+//     } catch (error) {
+//       console.log("Cannot start server");
+//       console.log(error);
+//     }
+//   });
+// };
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  prompt: "Enter your DB (or type 'default'): ",
-});
+// const readline = require("node:readline");
 
-rl.prompt();
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+//   prompt: "Enter your DB (or type 'default'): ",
+// });
 
-rl.on("line", (input) => {
-  switch (input) {
-    case "default":
-      console.log("Correct input!");
-      rl.close();
-      // Server Starts here - Check ToDo Routes
-      require("./routes/todo.routes.js")(app);
-      start();
-      rl.close();
-      break;
-    case "none":
-      console.log("No db connected");
-      require("./routes/fakeData.routes.js")(app);
-      start();
-      rl.close();
-      break;
-    default:
-      console.log("Invalid input, please try again.");
-      rl.prompt();
-  }
-}).on("close", () => {
-  console.log("Exiting the readline interface...");
-});
+// rl.prompt();
 
-rl.on("SIGINT", () => {
-  console.log("Interrupted by user, closing the readline interface...");
+// rl.on("line", (input) => {
+//   switch (input) {
+//     case "default":
+//       console.log("Correct input!");
+//       rl.close();
+//       // Server Starts here - Check ToDo Routes
+//       require("./routes/todo.routes.js")(app);
+//       start();
+//       rl.close();
+//       break;
+//     case "none":
+//       console.log("No db connected");
+//       require("./routes/fakeData.routes.js")(app);
+//       start();
+//       rl.close();
+//       break;
+//     default:
+//       console.log("Invalid input, please try again.");
+//       rl.prompt();
+//   }
+// }).on("close", () => {
+//   console.log("Exiting the readline interface...");
+// });
 
-  rl.close();
-});
+// rl.on("SIGINT", () => {
+//   console.log("Interrupted by user, closing the readline interface...");
+
+//   rl.close();
+// });
