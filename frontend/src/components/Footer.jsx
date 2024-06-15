@@ -1,14 +1,24 @@
+import clsx from 'clsx'
 import React from 'react'
+import FooterButton from './FooterButton'
 
-const style =
-    'mt-auto bg-white rounded-b-2xl flex flex-row justify-between px-4 py-4'
+let isMultiple = false
 
-const Footer = () => {
+const Footer = ({ apis }) => {
+    isMultiple = apis.length > 1
+    const style = clsx(
+        'w-full mt-auto bg-white rounded-b-3xl flex flex-row items-center p-4 text-black',
+        {
+            // component hooked style
+            'justify-around': isMultiple,
+            'justify-center': !isMultiple,
+        }
+    )
     return (
         <div className={style}>
-            <div className="">A</div>
-            <div className="">A</div>
-            <div className="">A</div>
+            {apis.map((api, index) => (
+                <FooterButton key={index} props={api} />
+            ))}
         </div>
     )
 }
