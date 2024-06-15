@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Title = () => {
-    return <div className="text-1xl px-4 text-white">All Tasks</div>
+const Tab = () => {
+    return <div className="text-1xl px-4">All Tasks</div>
 }
 
-export default Title
+export default Tab

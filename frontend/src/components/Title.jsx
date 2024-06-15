@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Title = () => {
+const Title = ({ props }) => {
     return (
         <div>
-            <div className="text-3xl text-white">To do</div>
+            <div className="text-3xl text-white">{props}</div>
         </div>
     )
 }
