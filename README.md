@@ -49,3 +49,6 @@ Run this command to start ngrok server along with localhost app
 ```console
 ngrok http --domain=genuinely-sensible-dinosaur.ngrok-free.app --config ngrok.yml 8080
 ```
+
+# Access to app on another device
+https://stackoverflow.com/questions/47412363/how-to-open-a-create-react-app-from-another-computer-connected-to-the-same-netwo
